@@ -1,0 +1,94 @@
+{
+  "columns": [
+    "nhóm",
+    "name",
+    "cơ chế",
+    "đặc điểm"
+  ],
+  "drugs": [
+    {
+      "nhóm": "Nhóm Beta-lactam",
+      "name": "Beta-lactam (Penicillin, Cephalosporin, Carbapenem, Monobactam)",
+      "cơ chế": "Ức chế PBP → ngăn tổng hợp thành tế bào vi khuẩn → diệt khuẩn.",
+      "đặc điểm": "Đề kháng: thay đổi PBP, giảm tính thấm, bơm ngược kháng sinh, sản xuất men β-lactamase."
+    },
+    {
+      "nhóm": "Nhóm Beta-lactam",
+      "name": "Chất ức chế β-lactamase",
+      "cơ chế": "Vô hiệu hóa men β-lactamase.",
+      "đặc điểm": "Phối hợp với Beta-lactam."
+    },
+    {
+      "nhóm": "Nhóm Ức chế tổng hợp protein",
+      "name": "Aminoglycosid",
+      "cơ chế": "Gắn vào tiểu đơn vị 30S → ức chế dịch mã, diệt khuẩn nhanh.",
+      "đặc điểm": "Đặc hiệu trên Gram âm hiếu khí."
+    },
+    {
+      "nhóm": "Nhóm Ức chế tổng hợp protein",
+      "name": "Macrolid & Phenicol",
+      "cơ chế": "Gắn vào tiểu đơn vị 50S → ức chế tổng hợp protein → kìm khuẩn.",
+      "đặc điểm": "Phổ rộng, hiệu quả trên vi khuẩn nội bào."
+    },
+    {
+      "nhóm": "Nhóm Ức chế tổng hợp protein",
+      "name": "Tetracyclin",
+      "cơ chế": "Gắn vào tiểu đơn vị 30S → ngăn tổng hợp protein.",
+      "đặc điểm": "Phổ rộng nhưng bị đề kháng cao."
+    },
+    {
+      "nhóm": "Nhóm Ức chế tổng hợp protein",
+      "name": "Lincosamid (Clindamycin)",
+      "cơ chế": "Gắn gần Macrolid và Phenicol → kìm khuẩn.",
+      "đặc điểm": "Phổ hẹp trên Gram dương và một số kỵ khí."
+    },
+    {
+      "nhóm": "Nhóm Ức chế tổng hợp protein",
+      "name": "Oxazolidinon (Linezolid)",
+      "cơ chế": "Gắn vào tiểu đơn vị 50S → kìm khuẩn.",
+      "đặc điểm": "Đặc biệt hiệu quả trên MRSA và VRE, chưa có đề kháng chéo."
+    },
+    {
+      "nhóm": "Nhóm Ức chế tổng hợp acid nucleic",
+      "name": "Quinolon/Fluoroquinolon",
+      "cơ chế": "Ức chế DNA gyrase và topoisomerase IV → diệt khuẩn.",
+      "đặc điểm": "Phổ rộng dần, tác động trên nhiều vi khuẩn kháng thuốc."
+    },
+    {
+      "nhóm": "Nhóm Ức chế tổng hợp acid nucleic",
+      "name": "Sulfamid",
+      "cơ chế": "Ức chế cạnh tranh PABA → ngăn tổng hợp acid folic.",
+      "đặc điểm": "Kìm khuẩn, phổ rộng nhưng bị đề kháng cao."
+    },
+    {
+      "nhóm": "Nhóm Ức chế tổng hợp acid nucleic",
+      "name": "Rifamycin (Rifampicin)",
+      "cơ chế": "Ức chế RNA polymerase → ngăn tổng hợp RNA.",
+      "đặc điểm": ""
+    },
+    {
+      "nhóm": "Các nhóm khác",
+      "name": "Peptid (Vancomycin)",
+      "cơ chế": "Ức chế tổng hợp thành vi khuẩn.",
+      "đặc điểm": "Trị MRSA và VRE (Gram dương)."
+    },
+    {
+      "nhóm": "Các nhóm khác",
+      "name": "Polypeptid (Polymyxin, Colistin)",
+      "cơ chế": "Chưa xác định",
+      "đặc điểm": "Trị vi khuẩn Gram âm (Pseudomonas aeruginosa)."
+    },
+    {
+      "nhóm": "Các nhóm khác",
+      "name": "Fosfomycin",
+      "cơ chế": "Ức chế tổng hợp thành vi khuẩn.",
+      "đặc điểm": "Trị Gram dương và Gram âm họ đường ruột."
+    },
+    {
+      "nhóm": "Các nhóm khác",
+      "name": "Lipopeptid (Daptomycin)",
+      "cơ chế": "Gắn màng tế bào → làm mất điện thế màng.",
+      "đặc điểm": "Trị Gram dương, bao gồm cả MRSA và VRE."
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "columns": [
+    "nhóm",
+    "name",
+    "cơ chế",
+    "đặc điểm"
+  ],
+  "drugs": [
+    {
+      "nhóm": "Ức chế men chuyển (ACEIs)",
+      "name": "Lisinopril",
+      "cơ chế": "Ức chế men chuyển để hạ huyết áp.",
+      "đặc điểm": "Không phải tiền thuốc."
+    },
+    {
+      "nhóm": "Chẹn Beta",
+      "name": "Bisoprolol, Esmolol",
+      "cơ chế": "Ức chế thụ thể beta-1 → giảm nhịp tim và huyết áp.",
+      "đặc điểm": "Esmolol có tác dụng rất ngắn, dùng tiêm truyền."
+    },
+    {
+      "nhóm": "Chẹn kênh Calci",
+      "name": "Amlodipine, Nifedipine",
+      "cơ chế": "Ức chế kênh Calci.",
+      "đặc điểm": "Nhóm dihydropyridine. Amlodipine dùng hạ huyết áp, Nifedipine dùng cho đau thắt ngực và tăng huyết áp."
+    },
+    {
+      "nhóm": "Lợi tiểu",
+      "name": "Thiazid (Chlorothiazide)",
+      "cơ chế": "Ức chế tái hấp thu Na+ và Cl- ở ống lượn xa.",
+      "đặc điểm": ""
+    },
+    {
+      "nhóm": "Lợi tiểu",
+      "name": "Lợi tiểu quai (Furosemide)",
+      "cơ chế": "Tác dụng mạnh, ức chế tái hấp thu Na+/K+/2Cl- ở quai Henle.",
+      "đặc điểm": ""
+    },
+    {
+      "nhóm": "Lợi tiểu",
+      "name": "Giữ kali (Spironolactone)",
+      "cơ chế": "Đối kháng aldosterone.",
+      "đặc điểm": "Giữ lại kali."
+    },
+    {
+      "nhóm": "Tăng co bóp cơ tim",
+      "name": "Dobutamine",
+      "cơ chế": "Chất chủ vận beta-1 adrenergic → tăng lực co bóp.",
+      "đặc điểm": ""
+    },
+    {
+      "nhóm": "Tăng co bóp cơ tim",
+      "name": "Digoxin",
+      "cơ chế": "Ức chế Na+/K+-ATPase → tăng Ca2+ nội bào → tăng lực co bóp.",
+      "đặc điểm": "Thuốc glycoside tim."
+    },
+    {
+      "nhóm": "Chống loạn nhịp",
+      "name": "Quinidine",
+      "cơ chế": "Chẹn kênh Na+.",
+      "đặc điểm": "Nhóm IA."
+    },
+    {
+      "nhóm": "Chống loạn nhịp",
+      "name": "Phenytoin",
+      "cơ chế": "Chẹn kênh Na+.",
+      "đặc điểm": "Nhóm IB, dùng trị loạn nhịp do ngộ độc digitalis."
+    },
+    {
+      "nhóm": "Các nhóm thuốc khác",
+      "name": "Glucocorticoid (Prednison)",
+      "cơ chế": "Hormone steroid.",
+      "đặc điểm": "Có thể gây hạ kali máu."
+    },
+    {
+      "nhóm": "Các nhóm thuốc khác",
+      "name": "Chủ vận Adrenergic (Epinephrine)",
+      "cơ chế": "Hoạt động trên thụ thể adrenergic.",
+      "đặc điểm": ""
+    },
+    {
+      "nhóm": "Các nhóm thuốc khác",
+      "name": "Methyldopa",
+      "cơ chế": "",
+      "đặc điểm": "Thuốc hạ huyết áp tác dụng trung ương, chuyển hóa thành alpha-methylnorepinephrine."
+    },
+    {
+      "nhóm": "Các nhóm thuốc khác",
+      "name": "Levodopa, Carbidopa",
+      "cơ chế": "",
+      "đặc điểm": "Levodopa dùng trị Parkinson, Carbidopa ức chế chuyển hóa L-DOPA ngoại biên."
+    },
+    {
+      "nhóm": "Tương tác qua enzyme CYP",
+      "name": "Chất cảm ứng CYP3A4 (Rifampicin, Phenobarbital)",
+      "cơ chế": "Tác động trên enzyme CYP3A4.",
+      "đặc điểm": "Giảm nồng độ thuốc khác."
+    },
+    {
+      "nhóm": "Tương tác qua enzyme CYP",
+      "name": "Chất ức chế CYP3A4 (Ketoconazol, Erythromycin)",
+      "cơ chế": "Tác động trên enzyme CYP3A4.",
+      "đặc điểm": "Tăng nồng độ thuốc khác."
+    },
+    {
+      "nhóm": "Tương tác qua enzyme CYP",
+      "name": "Warfarin",
+      "cơ chế": "Chuyển hóa bởi CYP2C9.",
+      "đặc điểm": "Có nhiều tương tác."
+    },
+    {
+      "nhóm": "Các chất khác",
+      "name": "NSAIDs",
+      "cơ chế": "",
+      "đặc điểm": "Có thể giảm tác dụng hạ huyết áp."
+    },
+    {
+      "nhóm": "Các chất khác",
+      "name": "Rượu",
+      "cơ chế": "",
+      "đặc điểm": "Gây hạ huyết áp quá mức."
+    },
+    {
+      "nhóm": "Các chất khác",
+      "name": "Kali",
+      "cơ chế": "",
+      "đặc điểm": "Ion điện giải quan trọng, liên quan đến tác dụng phụ của lợi tiểu."
+    }
+  ]
+}

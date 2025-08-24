@@ -1,0 +1,94 @@
+{
+  "columns": [
+    "nhóm",
+    "name",
+    "phổ biến",
+    "đặc trưng"
+  ],
+  "drugs": [
+    {
+      "nhóm": "Nhóm Beta-lactam",
+      "name": "Beta-lactam (Penicillin, Cephalosporin, Carbapenem)",
+      "phổ biến": "Dị ứng (đặc biệt là Penicillin), rối loạn tiêu hóa.",
+      "đặc trưng": "Penicillin liều cao: Co giật (ở bệnh nhân suy thận). Cephalosporin: Dị ứng chéo với Penicillin (10-15%), có thể gây chảy máu. Carbapenem: Buồn nôn, co giật."
+    },
+    {
+      "nhóm": "Nhóm Ức chế tổng hợp protein",
+      "name": "Aminoglycosid",
+      "phổ biến": "",
+      "đặc trưng": "Độc tính không hồi phục trên thính giác, độc tính có hồi phục trên thận. Gây ức chế dẫn truyền thần kinh cơ (kiểu curare)."
+    },
+    {
+      "nhóm": "Nhóm Ức chế tổng hợp protein",
+      "name": "Macrolid",
+      "phổ biến": "Rối loạn tiêu hóa.",
+      "đặc trưng": "Liều cao: độc tai, viêm gan ứ mật, loạn nhịp tim."
+    },
+    {
+      "nhóm": "Nhóm Ức chế tổng hợp protein",
+      "name": "Tetracyclin",
+      "phổ biến": "Nhạy cảm ánh sáng, rối loạn tiêu hóa.",
+      "đặc trưng": "Ở trẻ em: chậm phát triển xương, vàng răng."
+    },
+    {
+      "nhóm": "Nhóm Ức chế tổng hợp protein",
+      "name": "Phenicol (Chloramphenicol)",
+      "phổ biến": "",
+      "đặc trưng": "Thiếu máu bất sản do suy tủy. Hội chứng xám (Gray Baby syndrome) ở trẻ sơ sinh."
+    },
+    {
+      "nhóm": "Nhóm Ức chế tổng hợp protein",
+      "name": "Lincosamid (Clindamycin)",
+      "phổ biến": "",
+      "đặc trưng": "Có thể gây viêm ruột kết màng giả."
+    },
+    {
+      "nhóm": "Nhóm Ức chế tổng hợp protein",
+      "name": "Oxazolidinon (Linezolid)",
+      "phổ biến": "",
+      "đặc trưng": "Giảm tiểu cầu, đau đầu."
+    },
+    {
+      "nhóm": "Các nhóm khác",
+      "name": "Vancomycin",
+      "phổ biến": "",
+      "đặc trưng": "Hội chứng Red Man. Độc tính trên thận và thính giác."
+    },
+    {
+      "nhóm": "Các nhóm khác",
+      "name": "Quinolon",
+      "phổ biến": "Nhạy cảm ánh sáng, rối loạn thần kinh.",
+      "đặc trưng": "Tổn thương gân Achill."
+    },
+    {
+      "nhóm": "Các nhóm khác",
+      "name": "Sulfamid",
+      "phổ biến": "",
+      "đặc trưng": "Độc thận (tạo tinh thể trong nước tiểu), phản ứng quá mẫn ở da (Hội chứng Stevens-Johnson)."
+    },
+    {
+      "nhóm": "Các nhóm khác",
+      "name": "Nitrofurantoin",
+      "phổ biến": "",
+      "đặc trưng": "Độc tính nặng trên phổi."
+    },
+    {
+      "nhóm": "Các nhóm khác",
+      "name": "Imidazol (Metronidazol)",
+      "phổ biến": "",
+      "đặc trưng": "Vị kim loại khó chịu trong miệng, rối loạn tiêu hóa."
+    },
+    {
+      "nhóm": "Các nhóm khác",
+      "name": "Polypeptid (Colistin, Polymyxin B)",
+      "phổ biến": "",
+      "đặc trưng": "Độc tính rất cao trên thận."
+    },
+    {
+      "nhóm": "Các nhóm khác",
+      "name": "Lipopeptid (Daptomycin)",
+      "phổ biến": "",
+      "đặc trưng": "Độc tính trên thần kinh cơ."
+    }
+  ]
+}

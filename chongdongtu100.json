@@ -1,0 +1,34 @@
+{
+  "columns": [
+    "nhóm",
+    "name",
+    "cơ chế",
+    "đặc điểm"
+  ],
+  "drugs": [
+    {
+      "nhóm": "Thuốc đối kháng vitamin K",
+      "name": "Warfarin, Acenocoumarol",
+      "cơ chế": "Ngăn chặn hoạt động của vitamin K → giảm tổng hợp các yếu tố đông máu VII, IX, X.",
+      "đặc điểm": "Các yếu tố đông máu này phụ thuộc vitamin K."
+    },
+    {
+      "nhóm": "Thuốc ức chế trực tiếp thrombin",
+      "name": "Dabigatran",
+      "cơ chế": "Ức chế trực tiếp yếu tố IIa (thrombin) → ngăn chặn quá trình đông máu.",
+      "đặc điểm": ""
+    },
+    {
+      "nhóm": "Heparin trọng lượng phân tử thấp",
+      "name": "Enoxaparin",
+      "cơ chế": "Ức chế hoạt hóa các yếu tố đông máu, chủ yếu là yếu tố Xa → ngăn chặn quá trình đông máu.",
+      "đặc điểm": ""
+    },
+    {
+      "nhóm": "Thuốc có tương tác",
+      "name": "Omeprazole",
+      "cơ chế": "Không phải thuốc chống đông máu.",
+      "đặc điểm": "Tương tác với một số thuốc chống đông (như Warfarin và Cilostazol) thông qua hệ enzyme CYP3A4,CYP2C19."
+    }
+  ]
+}
