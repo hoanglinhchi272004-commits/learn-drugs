@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Offline Drug Matching </title>
+  <style>
+    :root{
+      --bg:#f6f7fb; --panel:#ffffff; --ink:#0f172a; --muted:#64748b; --border:#e5e7eb; --accent:#2563eb;
+      --ok:#16a34a; --bad:#ef4444; --shadow:0 8px 24px rgba(2,8,23,.08);
+      --chip:#ffffff; --chip-border:#e5e7eb; --pool-h: 168px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif}
+    header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+    header .wrap{max-width:1200px;margin:auto;padding:6px 10px;display:flex;gap:8px;align-items:center;justify-content:space-between}
+    .btn{appearance:none;border:1px solid var(--border);background:#fff;border-radius:12px;padding:6px 10px;font-weight:600;cursor:pointer;box-shadow:0 1px 0 rgba(0,0,0,.03);font-size:14px;white-space:nowrap}
+    .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+    .btn.flat{background:#fff}
+    .btn:disabled{opacity:.5;cursor:not-allowed}
+    .tag{display:inline-block;padding:.15rem .5rem;border:1px solid var(--border);border-radius:999px;color:var(--muted);font-size:12px}
+
+    main{max-width:1200px;margin:auto;padding:12px;}
+    
+    /* Responsive layout */
+    @media (max-width: 768px) {
+      header .wrap {padding: 6px; flex-wrap: wrap; justify-content: center;}
+      .btn {padding: 8px; font-size: 12px;}
+      main {padding: 8px;}
+      .note {font-size: 13px;}
+    }
+
+    .board-wrap{position:relative;background:var(--panel);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);}
+    .board{overflow:auto;max-height:calc(100vh - var(--pool-h) - 150px); /* chừa chỗ cho header + sticky pool */
+           border-radius:16px;}
+
+    /* Bảng lưới - responsive */
+    .grid{display:grid;grid-auto-rows:minmax(20px,auto);} 
+    .cell{border:1px solid var(--border); padding:8px; background:#fff; min-width:120px; position:relative; font-size:13px}
+    .cell.head{background:#f1f5f9;font-weight:400; position:sticky; top:0; z-index:5}
+    .cell.left{background:#f8fafc; font-weight:500; position:sticky; left:0; z-index:4}
+    .cell.corner{z-index:6}
+    .cell .mini{font-size:12px;color:var(--muted)}
+
+    /* Mobile grid adjustments */
+    @media (max-width: 768px) {
+      .cell {min-width: 70px; padding: 2px; font-size: 10px;}
+      .mini {font-size: 10px;}
+    }
+
+    /* Ô thả */
+    .drop{background:#f9fafb; border:2px dashed #e2e8f0; border-radius:12px; height:100%; display:flex; align-items:center; justify-content:space-between; gap:8px; padding:8px}
+    .drop.dragover{box-shadow:inset 0 0 0 3px rgba(37,99,235,.25)}
+    .drop.filled{border-style:solid;}
+    .drop.ok{background:#ecfdf5; border-color:#86efac}
+    .drop.bad{animation:shake .25s linear}
+    @keyframes shake{0%{transform:translateX(0)}25%{transform:translateX(-4px)}50%{transform:translateX(4px)}75%{transform:translateX(-3px)}100%{transform:translateX(0)}}
+
+    /* Thẻ kéo (chip) */
+    .chip{background:var(--chip); border:1px solid var(--chip-border); border-radius:12px; padding:6px 8px; box-shadow:0 1px 0 rgba(0,0,0,.06); cursor:grab; user-select:none; display:inline-flex; gap:8px; align-items:center; font-size:13px}
+    .chip:active{cursor:grabbing}
+    .chip .sub{font-size:10px; color:var(--muted)}
+    
+    /* Mobile chip adjustments */
+    @media (max-width: 768px) {
+  .chip {
+    font-size: 9px;
+    padding: 2px 3px;
+    border-radius: 6px;
+    margin: 1px;
+  }
+  .chip .sub {
+    font-size: 7px;
+  }
+}
+
+    /* Sticky Pool ở đáy */
+    .pool{position:fixed; bottom:0; left:0; right:0; z-index:40; background:rgba(255,255,255,.98); backdrop-filter:blur(8px); border-top:1px solid var(--border);}
+    .pool .wrap{margin:auto;padding:6px 12px; max-width:1200px}
+    .pool-controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-bottom:8px}
+    .pool-body{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:6px;max-height:calc(var(--pool-h) - 22px);overflow:auto;padding-bottom:8px}
+    
+    /* Mobile pool adjustments */
+    @media (max-width: 768px) {
+      .pool .wrap {padding: 4px 8px;}
+      .pool-body {grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));}
+      --pool-h: 150px; /* Smaller pool on mobile */
+    }
+
+    /* Modal dialogs */
+    dialog{border:none;border-radius:16px;box-shadow:var(--shadow);width:90%;max-width:600px;max-height:90vh;overflow-y:auto}
+    dialog::backdrop{background:rgba(2,6,23,.45)}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .field{display:flex;flex-direction:column;gap:6px}
+    input[type=text], select, textarea{border:1px solid var(--border);border-radius:10px;padding:8px;font-size:7px}
+    .note{color:#0b5; font-weight:600; font-size:9px}
+    
+    /* Mobile dialog adjustments */
+    @media (max-width: 768px) {
+      dialog {width: 95%; max-width: none;}
+      .form-grid {grid-template-columns: 1fr;}
+      input[type=text], select, textarea {padding: 6px; font-size: 16px;} /* Larger touch targets */
+      .note {font-size: 13px;}
+    }
+
+    /* Mobile-specific styles */
+    .mobile-controls {display: none;}
+    @media (max-width: 768px) {
+      .mobile-controls {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        gap: 8px;
+      }
+      .mobile-controls .btn {
+        flex: 1;
+        padding: 8px;
+      }
+    }
+
+    /* Touch indicators for touch devices */
+    @media (hover: none) {
+      .chip {
+        padding: 4px;
+        font-size: 10px;
+        margin: 4px 0;
+      }
+      .drop {
+        min-height: 52px; /* Minimum touch target size */
+      }
+    }
+
+    /* Ẩn phần tử kiểm thử */
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  </style>
+</head>
+<body>
+  <header>
+
+    <div class="wrap">
+      <div style="display:flex;align-items:center;gap:12px">
+        <strong>Offline Drug Matching</strong>
+        <span class="tag">Mobile</span>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button id="btnCols" class="btn">Sửa cột/hàng</button>
+        <button id="btnBulkImport" class="btn primary">Nhập dữ liệu</button>
+	<button id="btnFileImport" class="btn">Nhập từ File</button>
+        <button id="btnReset" class="btn flat">Chơi lại</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <p class="note"> Giới hạn lưới: <strong>30 hàng × 8 cột</strong>.</p>
+
+    <!-- Mobile-specific controls at the top -->
+
+    <section class="board-wrap">
+      <div id="board" class="board"><!-- Lưới sẽ được JS render vào đây --></div>
+
+      <!-- Sticky Pool ở cuối màn hình -->
+      <div class="pool">
+        <div class="wrap">
+          <div class="pool-controls">
+            <div style="display:flex;gap:8px;align-items:center">
+              <strong>Pool ngẫu nhiên</strong>
+              <label style="display:flex;gap:5px;align-items:center">
+                <input type="checkbox" id="subset" checked /> 
+                <span class="sub">Giới hạn 24 thẻ</span>
+              </label>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <button id="btnShuffle" class="btn">Xáo trộn</button>
+              <button id="btnCheck" class="btn primary">Kiểm tra</button>
+            </div>
+          </div>
+          <div id="pool" class="pool-body"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Hộp thoại: Sửa danh sách cột và hàng -->
+  <dialog id="dlgCols">
+    <form method="dialog" style="padding:16px;">
+      <h3 style="margin:0 0 8px 0">Sửa danh sách cột</h3>
+      <p style="margin:0 0 8px 0;color:var(--muted)">Cột đầu tiên luôn là <strong>name</strong> (tên thuốc) và không kéo/thả. Nhập các cột khác, phân cách bằng dấu phẩy.</p>
+      <div class="field">
+        <label>Cột (tối đa 8 — không bao gồm <code>name</code>)</label>
+        <input id="fCols" type="text" placeholder="character,definition, ...">
+      </div>
+      <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end">
+        <button class="btn flat">Đóng</button>
+        <button id="fColsSave" class="btn primary" value="save">Lưu cột</button>
+      </div>
+
+      <hr style="margin: 20px 0; border: 0; border-top: 1px solid var(--border);">
+
+      <h3 style="margin:0 0 8px 0">Sửa / Xóa hàng</h3>
+      <p style="margin:0 0 8px 0;color:var(--muted)">Chọn một thuốc để sửa tên hoặc xóa hàng.</p>
+      <div class="field">
+        <label>Chọn thuốc</label>
+        <select id="fSelectDrugToEdit">
+          <option value="">-- Chọn thuốc --</option>
+        </select>
+      </div>
+      <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end">
+        <button id="btnOpenRowEditFromCols" class="btn primary" disabled>Sửa / Xóa thuốc đã chọn</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Hộp thoại: Sửa/Xóa hàng (thuốc) -->
+  <dialog id="dlgRowEdit">
+    <form method="dialog" style="padding:16px;">
+      <h3 style="margin:0 0 8px 0">Sửa / Xóa hàng</h3>
+      <div class="field">
+        <label>Tên thuốc</label>
+        <input id="fRowName" type="text" readonly>
+      </div>
+      <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end">
+        <button class="btn flat">Đóng</button>
+        <button id="btnDeleteRow" class="btn flat" style="background:#ef4444; color:#fff;">Xóa hàng</button>
+        <button id="btnEditRowName" class="btn primary">Sửa tên</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dlgColHeaderEdit">
+    <form method="dialog" style="padding:16px;">
+      <h3 style="margin:0 0 8px 0">Sửa / Xóa tiêu đề cột</h3>
+      <div class="field">
+        <label>Tên cột</label>
+        <input id="fColHeaderName" type="text" required>
+      </div>
+      <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end">
+        <button class="btn flat">Đóng</button>
+        <button id="btnDeleteColHeader" class="btn flat" style="background:#ef4444; color:#fff;">Xóa cột</button>
+        <button id="btnEditColHeaderSave" class="btn primary" value="save">Lưu</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dlgBulkImport">
+    <form method="dialog" style="padding:16px;">
+      <h3 style="margin:0 0 8px 0">Nhập dữ liệu hàng loạt</h3>
+      <p style="margin:0 0 8px 0;color:var(--muted)">Dán dữ liệu thuốc dưới dạng mảng JSON. Mỗi đối tượng phải có khóa "name" và các khóa cột khác. Ví dụ:</p>
+      <pre style="background:#f1f5f9;padding:8px;border-radius:8px;font-size:12px;overflow-x:auto;"><code>[
+  {
+    "name": "Thuốc A",
+    "chỉ định": "Chỉ định của thuốc A",
+    "liều dùng": "Liều dùng của thuốc A"
+  },
+  {
+    "name": "Thuốc B",
+    "chỉ định": "Chỉ định của thuốc B",
+    "tác dụng phụ": "Tác dụng phụ của thuốc B"
+  }
+]</code></pre>
+      <div class="field">
+        <label>Dữ liệu JSON</label>
+        <textarea id="fBulkData" rows="10" placeholder="Dán mảng JSON của bạn vào đây..." required></textarea>
+      </div>
+      <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end">
+        <button class="btn flat">Đóng</button>
+        <button id="fBulkImportSave" class="btn primary" value="save">Nhập</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script>
+// =============================
+// CẤU HÌNH & DỮ LIỆU MẪU
+// =============================
+const MAX_ROWS = 30;
+const MAX_COLS = 8;
+
+const defaultColumns = ['chỉ định', 'liều dùng', 'chống chỉ định', 'tác dụng phụ', 'tương tác thuốc'];
+const defaultDrugs = [
+  // You can add default drug data here if needed, e.g.:
+  // { name: "Thuốc A", "chỉ định": "Chỉ định A", "liều dùng": "Liều A" },
+  // { name: "Thuốc B", "chỉ định": "Chỉ định B", "tác dụng phụ": "Tác dụng phụ B" }
+];
+
+// =============================
+// TRẠNG THÁI (lưu localStorage)
+// =============================
+ let columns = JSON.parse(localStorage.getItem('dm_cols') || 'null') || defaultColumns.slice();
+    let drugs = JSON.parse(localStorage.getItem('dm_drugs') || 'null') || defaultDrugs.slice();
+    let checkMode = false;
+    let isTouchDevice = 'ontouchstart' in window;
+    function save() {
+      localStorage.setItem('dm_cols', JSON.stringify(columns));
+      localStorage.setItem('dm_drugs', JSON.stringify(drugs));
+    }
+// =============================
+// TIỆN ÍCH
+// =============================
+const $  = (sel,root=document)=>root.querySelector(sel);
+const $$ = (sel,root=document)=>Array.from(root.querySelectorAll(sel));
+const uid= (p='id')=> `${p}-${Math.random().toString(36).slice(2,9)}`;
+const shuffle = a=>a.map(x=>[Math.random(),x]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]);
+
+function titleCase(s){ return (s||'').replace(/_/g,' ').replace(/\w\S*/g,t=> t.charAt(0).toUpperCase()+t.slice(1)); }
+
+// =============================
+// KHỞI TẠO SAU KHI DOM SẴN SÀNG
+// =============================
+document.addEventListener('DOMContentLoaded', init);
+
+function init(){
+  const board = document.getElementById('board');
+  const pool  = document.getElementById('pool');
+
+  // --- Self-test ("test cases") để bắt sớm lỗi DOM thiếu phần tử ---
+  if(!board){ alert('Lỗi khởi tạo: thiếu #board trong HTML.'); throw new Error('Missing #board'); }
+  if(!pool){ alert('Lỗi khởi tạo: thiếu #pool trong HTML.'); throw new Error('Missing #pool'); }
+
+  // Nút & form
+  const btnCols = document.getElementById('btnCols');
+  const btnBulkImport = document.getElementById('btnBulkImport');
+  const btnReset = document.getElementById('btnReset');
+  const btnShuffle = document.getElementById('btnShuffle');
+  
+  const btnCheck = document.getElementById('btnCheck');
+  const subset = document.getElementById('subset');
+
+// --- START FIX: Nhập từ File ---
+const btnFileImport = document.getElementById('btnFileImport');
+const fileInput = document.getElementById('fileInput');
+
+btnFileImport.addEventListener('click', ()=> {
+  fileInput.value = ''; // Reset file input to allow selecting same file again
+  fileInput.click();
+});
+
+fileInput.addEventListener('change',(e)=>{
+  const file = e.target.files[0];
+  if (!file) {
+    console.log('No file selected or selection cancelled.');
+    return;
+  }
+  
+  // Basic file validation
+  if (!file.name.toLowerCase().endsWith('.json') && !file.name.toLowerCase().endsWith('.txt')) {
+      alert('Vui lòng chọn file JSON hoặc TXT.');
+      return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(evt){
+    const text = evt.target.result;
+    try {
+      const parsed = JSON.parse(text);
+
+      // Case 1: array of drug objects (simplified structure)
+      if (Array.isArray(parsed)) {
+        drugs = parsed;
+
+        // Auto-detect columns from all drug keys (except "name")
+        const colSet = new Set();
+        drugs.forEach(d => {
+          Object.keys(d).forEach(k => {
+            if (k !== "name") colSet.add(k);
+          });
+        });
+        columns = Array.from(colSet);
+
+      // Case 2: full object with columns + drugs (preferred structure)
+      } else if (parsed.drugs && Array.isArray(parsed.drugs) && parsed.columns && Array.isArray(parsed.columns)) {
+        drugs = parsed.drugs;
+        columns = parsed.columns.filter(c => c !== "name"); // ensure no duplicate 'name' column
+      } else {
+        throw new Error("Cấu trúc JSON không được nhận dạng. Phải là mảng thuốc hoặc đối tượng có thuộc tính 'drugs' và 'columns'.");
+      }
+
+      // Ensure drugs array is within MAX_ROWS limit
+      if (drugs.length > MAX_ROWS) {
+        alert(`Cảnh báo: Dữ liệu thuốc vượt quá ${MAX_ROWS} hàng. Chỉ giữ lại ${MAX_ROWS} hàng đầu tiên.`);
+        drugs = drugs.slice(0, MAX_ROWS);
+      }
+      // Ensure columns array is within MAX_COLS limit
+      if (columns.length > MAX_COLS) {
+        alert(`Cảnh báo: Dữ liệu cột vượt quá ${MAX_COLS} cột. Chỉ giữ lại ${MAX_COLS} cột đầu tiên.`);
+        columns = columns.slice(0, MAX_COLS);
+      }
+
+      // Rebuild the game
+      save(); // Save the new data
+      buildGrid();
+      buildPool();
+      alert("Đã nhập JSON thành công!");
+
+    } catch(err) {
+      alert("File không hợp lệ JSON: " + err.message);
+      console.error("File import error:", err);
+    }
+  };
+  reader.onerror = function() {
+    alert("Lỗi đọc file: " + reader.error);
+    console.error("FileReader error:", reader.error);
+  };
+  reader.readAsText(file,"UTF-8");
+});
+// --- END FIX: Nhập từ File ---
+
+  // Dialog elements
+  const dlgCols = document.getElementById('dlgCols');
+  const fCols  = document.getElementById('fCols');
+  const fColsSave = document.getElementById('fColsSave');
+  const fSelectDrugToEdit = document.getElementById('fSelectDrugToEdit');
+  const btnOpenRowEditFromCols = document.getElementById('btnOpenRowEditFromCols');
+
+  const dlgRowEdit = document.getElementById('dlgRowEdit');
+  const fRowName = document.getElementById('fRowName');
+  const btnDeleteRow = document.getElementById('btnDeleteRow');
+  const btnEditRowName = document.getElementById('btnEditRowName');
+
+  const dlgColHeaderEdit = document.getElementById('dlgColHeaderEdit');
+  const fColHeaderName = document.getElementById('fColHeaderName');
+  const btnDeleteColHeader = document.getElementById('btnDeleteColHeader');
+  const btnEditColHeaderSave = document.getElementById('btnEditColHeaderSave');
+
+  const dlgBulkImport = document.getElementById('dlgBulkImport');
+  const fBulkData = document.getElementById('fBulkData');
+  const fBulkImportSave = document.getElementById('fBulkImportSave');
+
+  let currentEditingColIndex = -1;
+
+    // --- START FIX: Global Drop Listener for Drag-to-Pool ---
+    document.body.addEventListener('drop', (e) => {
+      const id = e.dataTransfer.getData('text/plain');
+      const chip = document.getElementById(id);
+
+      if (!chip) return; // Not a chip being dragged
+
+      let targetDropZone = e.target.closest('.drop');
+
+      if (!targetDropZone) { // If dropped outside a valid drop zone
+        pool.appendChild(chip); // Return chip to pool
+        chip.classList.remove('selected'); // Remove any mobile selection highlight
+
+        // Retrieve original cell info from dataTransfer
+        const originalDropId = e.dataTransfer.getData('originalDropId');
+        const originalDrugName = e.dataTransfer.getData('originalDrugName');
+        const originalColName = e.dataTransfer.getData('originalColName');
+
+        const originalDropCell = document.getElementById(originalDropId);
+        if (originalDropCell && originalDropCell.classList.contains('filled')) {
+          originalDropCell.classList.remove('ok', 'bad', 'filled');
+          const span = originalDropCell.querySelector('.mini');
+          if (span) {
+            // Restore mini text based on original drug data
+            const drug = drugs.find(d => d.name === originalDrugName);
+            span.textContent = (drug && drug[originalColName]) ? '••••' : '';
+          }
+
+          // Update drug data to reflect removal from the cell
+          const drugIndex = drugs.findIndex(d => d.name === originalDrugName);
+          if (drugIndex !== -1) {
+            // Ensure the property exists before deleting to avoid errors on new cells
+            if (drugs[drugIndex].hasOwnProperty(originalColName)) {
+                delete drugs[drugIndex][originalColName];
+            }
+            save();
+          }
+        }
+      }
+    });
+
+    document.body.addEventListener('dragover', (e) => {
+      e.preventDefault(); // Allow drops on the body
+    });
+    // --- END FIX: Global Drop Listener for Drag-to-Pool ---
+    
+  // ----------------------------
+  // Dựng BẢNG với responsive
+  // ----------------------------
+  function buildGrid(){
+    if(columns.length > MAX_COLS) columns = columns.slice(0, MAX_COLS);
+    if(drugs.length > MAX_ROWS) drugs = drugs.slice(0, MAX_ROWS);
+
+    // Responsive column sizing
+    const isMobile = window.innerWidth <= 768;
+    const colWidths = isMobile 
+      ? ['120px', ...columns.map(() => '160px')].join(' ')
+      : ['200px', ...columns.map(() => '240px')].join(' ');
+      
+    board.innerHTML = `<div class="grid" style="grid-template-columns:${colWidths}; width:max-content; min-width:100%"></div>`;
+    const grid = board.firstElementChild;
+
+    // Ô góc (0,0)
+    const corner = cell('Thuốc', ['head','left','corner']);
+    grid.appendChild(corner);
+
+    // Hàng tiêu đề (sticky top)
+    columns.forEach((col, index) => {
+      const headerCell = cell(titleCase(col), ['head']);
+      headerCell.dataset.colName = col;
+      headerCell.dataset.colIndex = index;
+
+      // Add dblclick listener for editing/deleting column header
+      headerCell.addEventListener(isTouchDevice ? 'touchstart' : 'dblclick', (e) => {
+        if (isTouchDevice) {
+          // For touch devices, delay the event to distinguish from taps
+          const touchStartTime = Date.now();
+          setTimeout(() => {
+            if (Date.now() - touchStartTime > 500) { // Long press
+              e.preventDefault();
+              const clickedColName = e.target.dataset.colName;
+              toggleColHeaderEdit(clickedColName, index);
+            }
+          }, 500);
+        } else {
+          const clickedColName = e.target.dataset.colName;
+          toggleColHeaderEdit(clickedColName, index);
+        }
+      });
+      grid.appendChild(headerCell);
+    });
+
+    // Hàng dữ liệu
+    drugs.forEach(drug => {
+      const drugNameCell = cell(drug.name || '(chưa đặt tên)', ['left']);
+      drugNameCell.dataset.drugName = drug.name;
+      
+      // Tap/long press instead of double click on mobile
+      drugNameCell.addEventListener(isTouchDevice ? 'touchstart' : 'dblclick', (e) => {
+        if (isTouchDevice) {
+          const touchStartTime = Date.now();
+          setTimeout(() => {
+            if (Date.now() - touchStartTime > 500) { // Long press
+              e.preventDefault();
+              toggleDrugEdit(drug.name);
+            }
+          }, 500);
+        } else {
+          toggleDrugEdit(drug.name);
+        }
+      });
+      grid.appendChild(drugNameCell);
+
+      columns.forEach(col => grid.appendChild(dropCell(drug.name, col, (drug[col]||''))));
+    });
+
+    // Chừa khoảng cuối để không bị che bởi pool
+    board.style.paddingBottom = 'calc(var(--pool-h) + 20px)';
+  }
+
+  function toggleColHeaderEdit(colName, index) {
+    fColHeaderName.value = colName;
+    currentEditingColIndex = index;
+    dlgColHeaderEdit.showModal();
+  }
+
+  function toggleDrugEdit(drugName) {
+    fRowName.value = drugName;
+    dlgRowEdit.showModal();
+  }
+
+  function cell(text, classes=[]){
+    const el = document.createElement('div');
+    el.className = `cell ${classes.join(' ')}`.trim();
+    el.innerHTML = text;
+    return el;
+  }
+
+  function dropCell(drugName, col, current){
+    const el = document.createElement('div');
+    el.className = 'cell';
+
+    const drop = document.createElement('div');
+    drop.className = 'drop';
+    drop.dataset.expectDrug = drugName;
+    drop.dataset.expectCol  = col;
+    // --- START FIX: Add ID to drop cell ---
+    drop.id = uid('drop'); // Assign a unique ID to the drop cell
+    // --- END FIX ---
+
+    const span = document.createElement('span');
+    span.className = 'mini';
+    span.textContent = current ? '••••' : '';
+
+    // --- START FIX: Remove 'clear' button related code ---
+    // Removed: const clear = document.createElement('button'); ...
+    // Removed: clear.addEventListener('click', ...);
+    drop.append(span); // Append only the span, 'clear' button is removed
+    // --- END FIX ---
+
+    if (current) {
+      const chip = makeChip(current, drugName, col);
+      // --- START FIX: Insert chip before span ---
+      drop.insertBefore(chip, span); // Insert chip before the span element
+      // --- END FIX ---
+      drop.classList.add('filled'); 
+      span.textContent = '';
+      // Removed: clear.style.display = 'inline-block';
+    }
+
+    // Setup drag and drop for desktop
+    drop.addEventListener('dragover', e=>{ e.preventDefault(); drop.classList.add('dragover'); });
+    drop.addEventListener('dragleave', ()=> drop.classList.remove('dragover'));
+    drop.addEventListener('drop', e=>{
+      e.preventDefault(); drop.classList.remove('dragover');
+      const id = e.dataTransfer.getData('text/plain');
+      const chip = document.getElementById(id);
+      if(!chip) return;
+
+      handleDrop(drop, chip);
+    });
+
+    // Setup touch interactions for mobile
+    if (isTouchDevice) {
+      // Removed: touchstart listener for 'clear' button
+ 
+      // Handle tap to select chip from pool and move to cell
+      drop.addEventListener('click', (e) => {
+        if (!drop.classList.contains('filled') && activeChip) {
+          handleDrop(drop, activeChip);
+          activeChip = null;
+        }
+      });
+    }
+
+    el.appendChild(drop);
+    return el;
+  }
+
+  // Track active chip for mobile selection
+  let activeChip = null;
+
+  function handleDrop(drop, chip) {
+    // NEW: Chip disappears from pool immediately
+    chip.remove(); 
+
+    const expectD = drop.dataset.expectDrug;
+    const expectC = drop.dataset.expectCol;
+
+    // Return existing chip to pool if one is already in the drop zone
+    const existing = drop.querySelector('.chip');
+    if(existing){ pool.appendChild(existing); } 
+
+    // --- START FIX: Ensure chip is inserted correctly ---
+    // drop.lastElementChild will now correctly refer to the 'mini' span
+    drop.insertBefore(chip, drop.lastElementChild); 
+    // --- END FIX ---
+    drop.classList.add('filled');
+    drop.classList.remove('ok', 'bad');
+    drop.querySelector('.mini').textContent = '';
+    // --- START FIX: Removed clearBtn display logic ---
+    // Removed: const clearBtn = drop.querySelector('.btn.flat'); if (clearBtn) clearBtn.style.display = ...
+    // --- END FIX ---
+
+    // Update drug data
+    const drugIndex = drugs.findIndex(d => d.name === expectD);
+    if (drugIndex !== -1) {
+      drugs[drugIndex][expectC] = chip.textContent;
+      save();
+    }
+  }
+
+  // NEW: Function to check answers and apply effects
+  function checkAnswers() {
+    checkMode = true;
+    $$('.drop').forEach(drop => {
+      const chip = drop.querySelector('.chip');
+      drop.classList.remove('ok', 'bad');
+
+      if (chip) {
+        const expectD = drop.dataset.expectDrug;
+        const expectC = drop.dataset.expectCol;
+
+        if (chip.dataset.drug === expectD && chip.dataset.col === expectC) {
+          drop.classList.add('ok');
+        } else {
+          drop.classList.add('bad');
+          chip.classList.add('bad');
+          setTimeout(()=>{ chip.classList.remove('bad'); }, 280);
+        }
+      } else {
+        const drugName = drop.dataset.expectDrug;
+        const colName = drop.dataset.expectCol;
+        const drug = drugs.find(d => d.name === drugName);
+        if (drug && drug[colName]) {
+          drop.classList.add('bad');
+        }
+      }
+    });
+  }
+
+  // ----------------------------
+  // POOL thẻ ngẫu nhiên
+  // ----------------------------
+  function buildPool(){
+    pool.innerHTML = '';
+    let cards = [];
+
+    drugs.forEach(d => {
+      columns.forEach(col => {
+        const text = d[col] || '';
+        if(text){ cards.push({ label:text, drug:d.name, col }); }
+      });
+    });
+
+    cards = shuffle(cards);
+    if(subset && subset.checked){ cards = cards.slice(0, 24); }
+
+    cards.forEach(c => {
+      const chip = makeChip(c.label, c.drug, c.col);
+      
+      // For touch devices, add tap to select functionality
+      if (isTouchDevice) {
+        chip.addEventListener('click', () => {
+          // Highlight the selected chip
+          $$('.chip').forEach(c => c.classList.remove('selected'));
+          chip.classList.add('selected');
+          activeChip = chip;
+          
+          // Show message to tap where to place it
+          const msg = document.createElement('div');
+          msg.textContent = 'Chạm vào ô để đặt thẻ';
+          msg.style.position = 'fixed';
+          msg.style.top = '50%';
+          msg.style.left = '50%';
+          msg.style.transform = 'translate(-50%, -50%)';
+          msg.style.backgroundColor = 'var(--accent)';
+          msg.style.color = 'white';
+          msg.style.padding = '10px';
+          msg.style.borderRadius = '8px';
+          msg.style.zIndex = '1000';
+          document.body.appendChild(msg);
+          
+          setTimeout(() => {
+            document.body.removeChild(msg);
+          }, 2000);
+        });
+      }
+      
+      pool.appendChild(chip);
+    });
+  }
+
+  function makeChip(text, drugName, col){
+    const chip = document.createElement('div');
+    chip.className = 'chip';
+    chip.textContent = text;
+    chip.id = uid('chip');
+    chip.draggable = !isTouchDevice; // Only draggable on desktop
+    chip.dataset.drug = drugName;
+    chip.dataset.col  = col;
+
+
+    // --- ADD DOUBLE-TAP FUNCTIONALITY FOR MOBILE ---
+    if (isTouchDevice) {
+        let lastTap = 0;
+        chip.addEventListener('touchstart', (e) => {
+            const currentTime = new Date().getTime();
+            const tapLength = currentTime - lastTap;
+            
+            if (tapLength < 300 && tapLength > 0) {
+                // Double-tap detected - remove chip
+                e.preventDefault();
+                
+                // Visual feedback
+                chip.classList.add('chip-shaking');
+                
+                // Find the parent drop cell
+                const parentDrop = chip.closest('.drop');
+                if (parentDrop) {
+                    // Move chip back to pool
+                    pool.appendChild(chip);
+                    chip.classList.remove('chip-shaking', 'selected');
+                    
+                    // Reset drop cell appearance
+                    parentDrop.classList.remove('ok', 'bad', 'filled');
+                    const span = parentDrop.querySelector('.mini');
+                    if (span) {
+                        span.textContent = '••••';
+                    }
+                    
+                    // Update drug data
+                    const drugName = parentDrop.dataset.expectDrug;
+                    const colName = parentDrop.dataset.expectCol;
+                    const drugIndex = drugs.findIndex(d => d.name === drugName);
+                    if (drugIndex !== -1) {
+                        delete drugs[drugIndex][colName];
+                        save();
+                    }
+                    
+                    // Show success message
+                    showTemporaryMessage('Đã xóa thẻ khỏi ô');
+                }
+            }
+            lastTap = currentTime;
+        });
+    }
+    // --- END DOUBLE-TAP FUNCTIONALITY ---
+
+
+    chip.addEventListener('dragstart', e=>{
+      e.dataTransfer.setData('text/plain', chip.id);
+      e.dataTransfer.effectAllowed = 'move';
+      // --- START FIX: Add dataTransfer for original cell info ---
+      const parentDrop = chip.closest('.drop');
+      if (parentDrop) {
+        e.dataTransfer.setData('originalDropId', parentDrop.id);
+        e.dataTransfer.setData('originalDrugName', parentDrop.dataset.expectDrug);
+        e.dataTransfer.setData('originalColName', parentDrop.dataset.expectCol);
+      }
+      // --- END FIX ---
+    });
+    return chip;
+  }
+// Add helper function for temporary messages
+function showTemporaryMessage(message) {
+    const msg = document.createElement('div');
+    msg.textContent = message;
+    msg.style.position = 'fixed';
+    msg.style.top = '50%';
+    msg.style.left = '50%';
+    msg.style.transform = 'translate(-50%, -50%)';
+    msg.style.backgroundColor = 'var(--accent)';
+    msg.style.color = 'white';
+    msg.style.padding = '10px 16px';
+    msg.style.borderRadius = '8px';
+    msg.style.zIndex = '1000';
+    msg.style.fontSize = '9px';
+    document.body.appendChild(msg);
+    
+    setTimeout(() => {
+        if (document.body.contains(msg)) {
+            document.body.removeChild(msg);
+        }
+    }, 1500);
+}
+function fillAllAnswers(){
+  // Clear pool
+  pool.innerHTML = "";
+
+  // For each drug and column, create and drop the correct chip
+  drugs.forEach(drug=>{
+    columns.forEach(c=>{
+      const val = drug[c];
+      if(val){
+        const drop = document.querySelector(
+          `.drop[data-expect-drug="${drug.name}"][data-expect-col="${c}"]`
+        );
+        if(drop){
+          const chip = makeChip(val, drug.name, c);
+          drop.appendChild(chip);
+          drop.classList.add('ok');
+          const span = drop.querySelector('.mini');
+          if(span) span.textContent = "";
+        }
+      }
+    });
+  });
+}
+
+  // ----------------------------
+  // SỰ KIỆN NÚT & FORM
+  // ----------------------------
+  btnCols.addEventListener('click', ()=>{
+    fCols.value = columns.join(',');
+    fSelectDrugToEdit.innerHTML = '<option value="">-- Chọn thuốc --</option>';
+    drugs.forEach(drug => {
+      const option = document.createElement('option');
+      option.value = drug.name;
+      option.textContent = drug.name;
+      fSelectDrugToEdit.appendChild(option);
+    });
+    btnOpenRowEditFromCols.disabled = true;
+    dlgCols.showModal();
+  });
+
+  fSelectDrugToEdit.addEventListener('change', () => {
+    btnOpenRowEditFromCols.disabled = !fSelectDrugToEdit.value;
+  });
+
+  btnOpenRowEditFromCols.addEventListener('click', () => {
+    const selectedDrugName = fSelectDrugToEdit.value;
+    if (selectedDrugName) {
+      fRowName.value = selectedDrugName;
+      dlgCols.close();
+      dlgRowEdit.showModal();
+    }
+  });
+
+  fColsSave.addEventListener('click', (e)=>{
+    e.preventDefault();
+    const list = fCols.value.split(',').map(s=>s.trim()).filter(Boolean);
+    if(list.length>MAX_COLS){ alert(`Quá ${MAX_COLS} cột. Hãy bớt lại.`); return; }
+    if(list.some(x=>x.toLowerCase()==='name')){ alert('Không dùng tên cột "name" — đã cố định.'); return; }
+
+    columns = list.length? list : defaultColumns.slice();
+    drugs = drugs.map(d=>{
+      const out = { name:d.name };
+      columns.forEach(c=> out[c] = d[c] || '');
+      return out;
+    });
+    save();
+    dlgCols.close();
+    buildGrid();
+    buildPool();
+    checkMode = false;
+  });
+
+  btnShuffle.addEventListener('click', shufflePool);
+ 
+
+  function shufflePool() {
+    buildPool();
+    checkMode = false;
+    $$('.drop').forEach(drop => {
+      drop.classList.remove('ok', 'bad');
+    });
+  }
+
+  if(subset) subset.addEventListener('change', ()=> buildPool());
+
+btnReset.addEventListener('click', ()=>{
+  // Move every placed chip back to pool
+  $$('.drop .chip').forEach(chip => {
+    pool.appendChild(chip);
+  });
+
+  // Clear states (green/red highlights)
+  $$('.drop').forEach(drop => {
+    drop.classList.remove('ok','bad','filled');
+    const span = drop.querySelector('.mini');
+    if (span) span.textContent = '••••';
+    // Removed: const clearBtn = drop.querySelector('button'); if (clearBtn) clearBtn.style.display = 'none';
+  });
+
+  // Rebuild the pool (reshuffle)
+  buildPool();
+  checkMode = false;
+});
+
+
+  btnCheck.addEventListener('click', checkAnswers);
+
+  // Row editing/deletion
+  btnDeleteRow.addEventListener('click', () => {
+    const drugNameToDelete = fRowName.value;
+    {
+      drugs = drugs.filter(d => d.name !== drugNameToDelete);
+      save();
+      dlgRowEdit.close();
+      buildGrid();
+      buildPool();
+      checkMode = false;
+    }
+  });
+
+  btnEditRowName.addEventListener('click', () => {
+    const oldName = fRowName.value;
+    const newName = prompt(`Nhập tên mới cho "${oldName}":`, oldName);
+    if (newName && newName.trim() !== '' && newName.trim() !== oldName) {
+      const drugIndex = drugs.findIndex(d => d.name === oldName);
+      if (drugIndex !== -1) {
+        drugs[drugIndex].name = newName.trim();
+        save();
+        dlgRowEdit.close();
+        buildGrid();
+        buildPool();
+        checkMode = false;
+      }
+    } else if (newName !== null) {
+      alert('Tên thuốc không hợp lệ hoặc trùng với tên cũ.');
+    }
+  });
+
+  // Column Header editing/deletion
+  btnEditColHeaderSave.addEventListener('click', (e) => {
+    e.preventDefault();
+    const newColName = fColHeaderName.value.trim();
+    if (!newColName) {
+      alert('Tên cột không được để trống.');
+      return;
+    }
+    if (newColName.toLowerCase() === 'name') {
+      alert('Không dùng tên cột "name" — đã cố định.');
+      return;
+    }
+    if (columns.includes(newColName) && columns[currentEditingColIndex] !== newColName) {
+      alert('Tên cột đã tồn tại.');
+      return;
+    }
+
+    const oldColName = columns[currentEditingColIndex];
+    columns[currentEditingColIndex] = newColName;
+
+    drugs.forEach(drug => {
+      if (drug.hasOwnProperty(oldColName)) {
+        drug[newColName] = drug[oldColName];
+        delete drug[oldColName];
+      }
+    });
+
+    save();
+    dlgColHeaderEdit.close();
+    buildGrid();
+    buildPool();
+    checkMode = false;
+  });
+
+  btnDeleteColHeader.addEventListener('click', () => {
+    const colNameToDelete = fColHeaderName.value;
+    {
+      columns.splice(currentEditingColIndex, 1);
+
+      drugs.forEach(drug => {
+        delete drug[colNameToDelete];
+      });
+
+      save();
+      dlgColHeaderEdit.close();
+      buildGrid();
+      buildPool();
+      checkMode = false;
+    }
+  });
+
+  // Bulk Import functionality
+  btnBulkImport.addEventListener('click', () => {
+    fBulkData.value = '';
+    dlgBulkImport.showModal();
+  });
+
+  fBulkImportSave.addEventListener('click', (e) => {
+    e.preventDefault();
+    const rawData = fBulkData.value.trim();
+    if (!rawData) {
+      alert('Vui lòng dán dữ liệu JSON.');
+      return;
+    }
+
+    try {
+      const importedDrugs = JSON.parse(rawData);
+
+      if (!Array.isArray(importedDrugs)) {
+        alert('Dữ liệu phải là một mảng JSON.');
+        return;
+      }
+
+      const newColumnsFound = new Set();
+      importedDrugs.forEach(newDrug => {
+        if (typeof newDrug !== 'object' || newDrug === null || !newDrug.name) {
+          throw new Error('Mỗi đối tượng thuốc phải có khóa "name".');
+        }
+
+        const existingDrugIndex = drugs.findIndex(d => d.name === newDrug.name);
+
+        if (existingDrugIndex !== -1) {
+          Object.assign(drugs[existingDrugIndex], newDrug);
+        } else {
+          drugs.push(newDrug);
+        }
+
+        Object.keys(newDrug).forEach(key => {
+          if (key !== 'name' && !columns.includes(key)) {
+            newColumnsFound.add(key);
+          }
+        });
+      });
+
+      newColumnsFound.forEach(newCol => {
+        if (columns.length < MAX_COLS) {
+          columns.push(newCol);
+        } else {
+          console.warn(`Cột mới "${newCol}" không được thêm vì đã đạt giới hạn ${MAX_COLS} cột.`);
+        }
+      });
+
+      drugs = drugs.map(d => {
+        const updatedDrug = { name: d.name };
+        columns.forEach(col => {
+          updatedDrug[col] = d[col] || '';
+        });
+        return updatedDrug;
+      });
+
+      save();
+      dlgBulkImport.close();
+      buildGrid();
+      buildPool();
+      checkMode = false;
+      alert('Nhập dữ liệu hàng loạt thành công!');
+
+    } catch (error) {
+      alert('Lỗi khi phân tích dữ liệu JSON: ' + error.message);
+      console.error('Bulk import error:', error);
+    }
+  });
+
+  // Handle window resize for responsive layout
+  window.addEventListener('resize', () => {
+    // Rebuild grid when crossing mobile/desktop threshold
+    const wasMobile = isTouchDevice;
+    isTouchDevice = window.innerWidth <= 768 || 'ontouchstart' in window;
+    
+    if (wasMobile !== isTouchDevice) {
+      buildGrid();
+      buildPool();
+    }
+  });
+
+  // Lần đầu dựng giao diện
+  buildGrid();
+  buildPool();
+}
+  </script>
+<input type="file" id="fileInput" accept=".json,.txt" style="display:none">
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Insulin",
+    "nhóm": "Insulin và các chế phẩm Insulin",
+    "cơ chế": "Gắn vào receptor tế bào đích (gan, cơ, mỡ) → hoạt hóa tyrosin kinase và các IRS → tăng hấp thu glucose, tăng tổng hợp glycogen, giảm sản xuất glucose ở gan → hạ đường huyết."
+  },
+  {
+    "name": "Sulfonylurea (SU)",
+    "nhóm": "Thuốc hạ đường huyết đường uống",
+    "cơ chế": "Gắn vào SUR1 trên tế bào beta tụy → đóng kênh K+ → khử cực màng → mở kênh Ca2+ → giải phóng insulin."
+  },
+  {
+    "name": "Glinid (Meglitinid)",
+    "nhóm": "Thuốc hạ đường huyết đường uống",
+    "cơ chế": "Tương tự SU, tác dụng ngắn → kích thích giải phóng insulin nhanh chóng, giảm nguy cơ hạ đường huyết muộn."
+  },
+  {
+    "name": "Biguanid (metformin)",
+    "nhóm": "Thuốc hạ đường huyết đường uống",
+    "cơ chế": "Hoạt hóa AMPK → tăng nhạy cảm insulin ngoại biên, ức chế tân tạo glucose ở gan."
+  },
+  {
+    "name": "Thiazolidinedion (TZD, glitazon)",
+    "nhóm": "Thuốc hạ đường huyết đường uống",
+    "cơ chế": "Chủ vận receptor PPARγ → tăng nhạy cảm insulin ở mô ngoại biên, giảm sản xuất glucose ở gan."
+  },
+  {
+    "name": "Ức chế α-glucosidase (acarbose)",
+    "nhóm": "Thuốc hạ đường huyết đường uống",
+    "cơ chế": "Ức chế enzyme α-glucosidase ở ruột → làm chậm chuyển hóa carbohydrate, giảm hấp thu glucose sau ăn."
+  },
+  {
+    "name": "Ức chế DPP-4 (sitagliptin)",
+    "nhóm": "Thuốc hạ đường huyết đường uống",
+    "cơ chế": "Ức chế enzyme DPP-IV → tăng thời gian bán thải của incretin (GLP-1 và GIP) → tăng tiết insulin phụ thuộc glucose và giảm tiết glucagon."
+  },
+  {
+    "name": "Ức chế SGLT2",
+    "nhóm": "Thuốc hạ đường huyết đường uống",
+    "cơ chế": "Ức chế kênh đồng vận chuyển SGLT2 ở thận → giảm tái hấp thu glucose → tăng thải glucose qua nước tiểu."
+  },
+  {
+    "name": "Đồng vận thụ thể GLP-1 (exenatid, liraglutide)",
+    "nhóm": "Thuốc hạ đường huyết đường tiêm không phải Insulin",
+    "cơ chế": "Gắn vào thụ thể GLP-1 → tăng tiết insulin phụ thuộc glucose, giảm tiết glucagon, làm chậm rỗng dạ dày."
+  },
+  {
+    "name": "Dẫn xuất amylin (pramlintid)",
+    "nhóm": "Thuốc hạ đường huyết đường tiêm không phải Insulin",
+    "cơ chế": "Bắt chước tác dụng của amylin → làm chậm rỗng dạ dày, giảm tiết glucagon sau ăn."
+  }
+]

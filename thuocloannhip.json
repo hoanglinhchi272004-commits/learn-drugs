@@ -1,0 +1,76 @@
+{
+  "columns": [
+    "nhóm",
+    "name",
+    "cơ chế",
+    "phân loại/đặc điểm"
+  ],
+  "drugs": [
+    {
+      "nhóm": "Nhóm I: Chẹn kênh Na+",
+      "name": "Nhóm IA (Quinidine, Procainamide)",
+      "cơ chế": "Ức chế kênh Na+ → làm chậm quá trình khử cực, giảm tốc độ dẫn truyền → giảm nhịp tim.",
+      "phân loại/đặc điểm": "Kéo dài QT."
+    },
+    {
+      "nhóm": "Nhóm I: Chẹn kênh Na+",
+      "name": "Nhóm IB (Lidocain, Mexiletin)",
+      "cơ chế": "Ức chế kênh Na+ → làm chậm quá trình khử cực, giảm tốc độ dẫn truyền → giảm nhịp tim.",
+      "phân loại/đặc điểm": "Dùng cho loạn nhịp thất sau nhồi máu cơ tim."
+    },
+    {
+      "nhóm": "Nhóm I: Chẹn kênh Na+",
+      "name": "Nhóm IC (Flecainide, Propafenone)",
+      "cơ chế": "Ức chế kênh Na+ → làm chậm quá trình khử cực, giảm tốc độ dẫn truyền → giảm nhịp tim.",
+      "phân loại/đặc điểm": "Làm chậm dẫn truyền, dùng cho loạn nhịp trên và trong thất."
+    },
+    {
+      "nhóm": "Nhóm II: Chẹn Beta",
+      "name": "Metoprolol, Atenolol (chọn lọc beta-1), Propranolol (không chọn lọc)",
+      "cơ chế": "Ức chế thụ thể beta-1 → giảm tính tự động của nút xoang, làm chậm nhịp xoang và dẫn truyền → giảm nhịp tim.",
+      "phân loại/đặc điểm": ""
+    },
+    {
+      "nhóm": "Nhóm III: Chẹn kênh K+",
+      "name": "Amiodarone, Sotalol",
+      "cơ chế": "Ức chế kênh K+ → làm chậm quá trình tái cực, kéo dài thời gian hoạt động của điện thế → giảm nhịp nhanh thất.",
+      "phân loại/đặc điểm": ""
+    },
+    {
+      "nhóm": "Nhóm IV: Chẹn kênh Ca++",
+      "name": "Verapamil, Diltiazem",
+      "cơ chế": "Ức chế kênh Ca++ loại L → làm chậm khử cực, giảm dẫn truyền ở nút xoang và nút nhĩ-thất → giảm nhịp tim và giảm co bóp.",
+      "phân loại/đặc điểm": ""
+    },
+    {
+      "nhóm": "Các thuốc khác",
+      "name": "Adenosine",
+      "cơ chế": "Kích hoạt kênh K+ và ức chế kênh Ca++ → ức chế dẫn truyền ở nút nhĩ-thất, giảm nhịp nhanh trên thất.",
+      "phân loại/đặc điểm": ""
+    },
+    {
+      "nhóm": "Các thuốc khác",
+      "name": "Ranolazine",
+      "cơ chế": "Ưu tiên ức chế dòng Na+ muộn → giảm Na+ nội bào.",
+      "phân loại/đặc điểm": ""
+    },
+    {
+      "nhóm": "Các thuốc khác",
+      "name": "Ivabradine",
+      "cơ chế": "Ức chế chọn lọc kênh I_f → giảm tần số nút xoang.",
+      "phân loại/đặc điểm": ""
+    },
+    {
+      "nhóm": "Các thuốc khác",
+      "name": "Digoxin",
+      "cơ chế": "Ức chế bơm Na+/K+-ATPase → tăng Ca++ nội bào → tăng co bóp, giảm nhịp xoang và dẫn truyền nhĩ-thất.",
+      "phân loại/đặc điểm": ""
+    },
+    {
+      "nhóm": "Các thuốc khác",
+      "name": "Magnesium (Mg2+) & Potassium (K+)",
+      "cơ chế": "Các ion này điều hòa điện thế màng → ảnh hưởng đến hoạt động của các kênh ion (Na+, K+, Ca2+).",
+      "phân loại/đặc điểm": ""
+    }
+  ]
+}
