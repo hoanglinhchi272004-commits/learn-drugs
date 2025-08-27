@@ -1,0 +1,82 @@
+ {
+    "columns": ["name", "nhóm", "đường dùng", "tương tác/đặc điểm"],
+    "drugs": [
+               {"name": "Ampicillin", "nhóm": "Penicillin phổ rộng, Gram âm", "đường dùng": "Uống (1)", "tương tác/đặc điểm": "Hấp thu giảm khi dùng với thức ăn."},
+        {"name": "Amoxicillin", "nhóm": "Penicillin phổ rộng, diệt H. pylori", "đường dùng": "Uống (2)", "tương tác/đặc điểm": "Sinh khả dụng tốt hơn Ampicillin, uống cùng hoặc không cùng thức ăn."},
+        {"name": "Doxycycline", "nhóm": "Ks ức chế ribosome", "đường dùng": "Uống (3)", "tương tác/đặc điểm": "Hấp thu giảm khi dùng với ion kim loại. Kích ứng mạnh nên PO nhiều nước"},
+        {"name": "Tetracycline", "nhóm": "Kháng sinh phổ rộng, tạo phức chelat với Ca²⁺, diệt H. pylori", "đường dùng": "Uống (4)", "tương tác/đặc điểm": "Hấp thu giảm khi dùng với ion kim loại."},
+        {"name": "Quinolon", "nhóm": "Fluoroquinolone, diệt H. pylori", "đường dùng": "Uống (5)", "tương tác/đặc điểm": "Tạo phức chelat với thuốc kháng acid. Tạo phức chelat với Ca²⁺"},
+        {"name": "Levofloxacin", "nhóm": "Quinolon", "đường dùng": "Uống (6)", "tương tác/đặc điểm":"Tạo phức chelat "},
+ 	{"name": "Griseofulvin", "nhóm": "Kháng nấm", "đường dùng": "Uống (7)", "tương tác/đặc điểm": "Thuốc thân dầu->Tăng hấp thu khi dùng chung với chất béo"},
+
+        {"name": "Ketoconazol", "nhóm": "Kháng nấm imidazole, ức chế 14-α-sterol demethylase", "đường dùng": "Uống (8)", "tương tác/đặc điểm": "Thuốc hấp thu môi trường acid"},
+        {"name": "Sucralfate", "nhóm": "Bảo vệ niêm mạc dạ dày", "đường dùng": "Uống (9)", "tương tác/đặc điểm": "Uống 1 g trước ăn để tạo lớp màng bảo vệ."},
+        {"name": "Antacids", "nhóm": "Trung hòa acid dịch vị", "đường dùng": "Uống (10)", "tương tác/đặc điểm": "Giảm acid dạ dày-> giảm hấp thu thuốc acid./ Uống 1-2h sau ăn để có tác dụng"},
+        {"name": "Omeprazole", "nhóm": "Ức chế bơm proton (PPI), trị loét dạ dày, GERD, xuất huyết", "đường dùng": "Uống (11)", "tương tác/đặc điểm": "Uống trước ăn 30 phút, giảm tác dụng Clopidogrel."},
+        {"name": "Kháng Histamin H2", "nhóm": "Ức chế cạnh tranh thụ thể H₂", "đường dùng": "Uống (12)", "tương tác/đặc điểm": "giảm tiết acid, tăng pH dạ dày"},
+        {"name": "Statin (Simvastatin, Lovastatin, Atorvastatin)", "nhóm": "Ức chế HMG-CoA reductase, giảm tổng hợp cholesterol", "đường dùng": "Uống (13)", "tương tác/đặc điểm": "Uống buổi tối, tương tác CYP3A4 → tiêu cơ vân. Không dùng chung bưới chùm(Chất UC CYP3A4)"},
+        {"name": "Enalapril", "nhóm": "Ức chế men chuyển (ACE inhibitor)", "đường dùng": "Uống (14)", "tương tác/đặc điểm": "Tiền chất, gây ho khan, phù mạch."},
+        {"name": "Propranolol", "nhóm": "Chẹn β-adrenergic không chọn lọc", "đường dùng": "Uống (15)", "tương tác/đặc điểm": "Chuyển hóa lần đầu cao."},
+        {"name": "Digoxin", "nhóm": "Glycoside tim", "đường dùng": "Uống (16)", "tương tác/đặc điểm": "Tương tác với P-gp → tăng nồng độ."},
+        {"name": "Clopidogrel", "nhóm": "Chống kết tập tiểu cầu", "đường dùng": "Uống (17)", "tương tác/đặc điểm": ""},
+        {"name": "Imipramine", "nhóm": "Chống trầm cảm 3 vòng (TCA)", "đường dùng": "Uống (18)", "tương tác/đặc điểm": "Ức chế tái hấp thu serotonin, norepinephrin."},
+        {"name": "Morphin", "nhóm": "Opioid, giảm đau mạnh", "đường dùng": "Uống, Dưới lưỡi (1)", "tương tác/đặc điểm": "Chuyển hóa lần đầu cao; dưới lưỡi hấp thu nhanh."},
+        {"name": "Levodopa", "nhóm": "Trị Parkinson", "đường dùng": "Uống (19)", "tương tác/đặc điểm": "Hấp thu giảm khi ăn giàu protein."},
+        {"name": "Diazepam", "nhóm": "Benzodiazepin, trị động kinh", "đường dùng": "Uống, Trực tràng (1)", "tương tác/đặc điểm": "Dạng trực tràng dùng cho cơn động kinh liên tục.Uống lúc đói tăng nồng độ thuốc"},
+        {"name": "Aspirin", "nhóm": "NSAID, ức chế COX-1 và COX-2", "đường dùng": "Uống (20)", "tương tác/đặc điểm": "Hấp thu tốt ở pH acid (dạ dày)."},
+        {"name": "Natri Alendronate", "nhóm": "Bisphosphonat, trị loãng xương", "đường dùng": "Uống (21)", "tương tác/đặc điểm": "Hấp thu giảm khi dùng với ion kim loại. Uống nhiều nước vào lúc đói, không nằm liền"},
+        {"name": "Glucocorticoids (Prednison)", "nhóm": "Hormone steroid, chống viêm, chống dị ứng", "đường dùng": "Uống,Trực tràng(2) ", "tương tác/đặc điểm": "Kích ứng mạnh tiêu hóa-> uống khi no."},
+        {"name": "Metformin", "nhóm": "Biguanid, tăng nhạy cảm insulin", "đường dùng": "Uống (22)", "tương tác/đặc điểm": "Dùng khi bụng rỗng"},
+        {"name": "Paracetamol", "nhóm": "Giảm đau, hạ sốt, kháng viêm yếu", "đường dùng": "Uống, Trực tràng (3)", "tương tác/đặc điểm": "Dùng đường trực tràng cho trẻ để tránh chuyển hóa lần đầu."},
+
+        {"name": "Nitroglycerin", "nhóm": "Thuốc giãn mạch vành", "đường dùng": "Dưới lưỡi (1)", "tương tác/đặc điểm": "Dùng cấp cứu cơn đau thắt ngực, tác dụng sau 1-2 phút."},
+        {"name": "Lorazepam, Zolpidem, Oxytocin, Isosorbide dinitrate, Estradiol, Buprenorphin", "nhóm": "Thuốc hấp thu nhanh, tránh chuyển hóa lần đầu", "đường dùng": "Dưới lưỡi (2)", "tương tác/đặc điểm": "Estradiol là hormone sinh dục [M] mạnh gan+ phá hủy bởi tiêu hóa."},
+
+        {"name": "Promethazine", "nhóm": "Kháng histamin H1, chống nôn, an thần", "đường dùng": "Trực tràng (1)", "tương tác/đặc điểm": ""},
+        {"name": "NSAIDs (khác), Glucocorticoids", "nhóm": "Giảm đau, chống viêm", "đường dùng": "Trực tràng (2)", "tương tác/đặc điểm": "Tránh chuyển hóa lần đầu qua gan."},
+
+        {"name": "Insulin", "nhóm": "Hormon từ tế bào β đảo tụy", "đường dùng": "Tiêm dưới da, truyền IV", "tương tác/đặc điểm": "Dùng IV, IM, SC vì dễ bị men tiêu hóa phá hủy."},
+        {"name": "Heparin", "nhóm": "Chống đông máu", "đường dùng": "Tiêm (1)", "tương tác/đặc điểm": "Khó hấp thu qua tiêu hóa do phân tử lượng lớn"},
+     
+     {"name": "Vancomycin", "nhóm": "Kháng sinh glycopeptid", "đường dùng": "Tiêm (2)", "tương tác/đặc điểm": ""},
+        {"name": "Dobutamin", "nhóm": "Cường giao cảm, chủ vận β1", "đường dùng": "Tiêm (3)", "tương tác/đặc điểm": "Tăng co bóp tim, tác dụng nhanh 1-10 phút, IV."},
+        {"name": "Furosemid", "nhóm": "Lợi tiểu quai", "đường dùng": "Tiêm (4)", "tương tác/đặc điểm": "Tăng đào thải Na+ ở ống thận."},
+        {"name": "Lidocain", "nhóm": "Gây tê amino amid, trị loạn nhịp", "đường dùng": "Tiêm (5)", "tương tác/đặc điểm": "Mạnh hơn procain 3 lần."},
+        {"name": "Bupivacain", "nhóm": "Gây tê amino amid", "đường dùng": "Tiêm (6)", "tương tác/đặc điểm": "Mạnh hơn lidocain 3-4 lần."},
+        {"name": "Fentanyl", "nhóm": "Opioid tổng hợp", "đường dùng": "Tiêm (7)", "tương tác/đặc điểm": "Giảm đau mạnh gấp 100 lần morphin."},
+        {"name": "Penicillin G", "nhóm": "Kháng sinh penicillin", "đường dùng": "Tiêm (8)", "tương tác/đặc điểm": ""},
+
+        {"name": "Corticosteroid (Triamcinolon, Betamethason)", "nhóm": "Chống viêm", "đường dùng": "Tiêm nội khớp ", "tương tác/đặc điểm": "Trị viêm khớp."},
+
+        {"name": "Salbutamol", "nhóm": "Chủ vận beta-2 tác dụng ngắn (SABA)", "đường dùng": "Hô hấp (8)", "tương tác/đặc điểm": "Dùng bình xịt định liều (MDI) trị hen phế quản cấp tính."},
+        {"name": "Glucocorticoids (Beclomethasone, Budesonide, Fluticasone)", "nhóm": "Corticosteroid hít (ICS)", "đường dùng": "Hô hấp (1)", "tương tác/đặc điểm": "Dạng hít dự phòng hen. Cần súc miệng sau dùng để tránh nấm miệng."},
+        {"name": "Tiotropium", "nhóm": "Kháng cholinergic tác dụng kéo dài (LAMA)", "đường dùng": "Hô hấp (2)", "tương tác/đặc điểm": "Dùng dạng hít, tác dụng kéo dài."},
+        {"name": "Formoterol", "nhóm": "Chủ vận beta-2 tác dụng kéo dài (LABA)", "đường dùng": "Hô hấp (3)", "tương tác/đặc điểm": "Dùng dạng hít, tác dụng nhanh và kéo dài, kiểm soát hen."},
+        {"name": "Calcitonin, Hormone tăng trưởng người, Insulin", "nhóm": "Các thuốc khác dạng hít", "đường dùng": "Hô hấp (4)", "tương tác/đặc điểm": "Đang được nghiên cứu hoặc sử dụng dạng hít."},
+
+        {"name": "Metronidazole", "nhóm": "Trị lỵ amib, trị nhiễm khuẩn âm đạo", "đường dùng": "Âm đạo (1)", "tương tác/đặc điểm": "Dùng viên nén hoặc kem đặt âm đạo để trị nhiễm khuẩn tại chỗ."},
+        {"name": "Neomycin", "nhóm": "Kháng sinh aminoglycoside", "đường dùng": "Âm đạo (2)", "tương tác/đặc điểm": "Dùng viên nén hoặc kem đặt âm đạo để trị nhiễm khuẩn tại chỗ."},
+
+        {"name": "Nystatin", "nhóm": "Kháng nấm (Polyen)", "đường dùng": "Âm đạo, Ngoài da (1)", "tương tác/đặc điểm": "Dùng viên nén hoặc kem đặt âm đạo hoặc bôi ngoài da trị nấm."},
+        {"name": "Clotrimazole", "nhóm": "Kháng nấm (Azole – Imidazole)", "đường dùng": "Âm đạo, Ngoài da (2)", "tương tác/đặc điểm": "Dùng viên nén hoặc kem đặt âm đạo hoặc bôi ngoài da trị nấm."},
+
+        {"name": "Chlorhexidine", "nhóm": "Sát khuẩn", "đường dùng": "Ngoài da (1)", "tương tác/đặc điểm": "Dùng ngoài da, tác dụng tại chỗ sát khuẩn."},
+        {"name": "Povidone-iodine", "nhóm": "Sát khuẩn", "đường dùng": "Ngoài da (2)", "tương tác/đặc điểm": "Dùng ngoài da, tác dụng tại chỗ sát khuẩn."},
+        {"name": "Miconazole", "nhóm": "Kháng nấm (Azole – Imidazole)", "đường dùng": "Ngoài da (3)", "tương tác/đặc điểm": "Dùng ngoài da, tác dụng tại chỗ trị nấm."},
+        {"name": "Glucocorticoids (Beclomethasone, Clobetasol, Hydrocortisone, Dexamethasone)", "nhóm": "Corticosteroid, kháng viêm", "đường dùng": "Ngoài da (4)", "tương tác/đặc điểm": "Dùng ngoài da trị viêm, giảm dị ứng."},
+        {"name": "Methylsalicylate", "nhóm": "Giảm đau, kháng viêm tại chỗ", "đường dùng": "Ngoài da (5)", "tương tác/đặc điểm": "Dùng ngoài da, tác dụng tại chỗ."},
+        {"name": "Diclofenac", "nhóm": "NSAID, dẫn xuất acid acetic", "đường dùng": "Ngoài da (6)", "tương tác/đặc điểm": "Dùng ngoài da, trị viêm, giảm đau."},
+        {"name": "Estrogen", "nhóm": "Hormon sinh dục nữ", "đường dùng": "Ngoài da (7)", "tương tác/đặc điểm": "Miếng dán qua da, tác dụng toàn thân, tránh chuyển hóa lần đầu."},
+        {"name": "Testosterone", "nhóm": "Hormon sinh dục nam", "đường dùng": "Ngoài da (8)", "tương tác/đặc điểm": "Miếng dán hoặc kem qua da, tác dụng toàn thân, tránh chuyển hóa lần đầu."},
+        {"name": "Estradiol", "nhóm": "Estrogen thiên nhiên", "đường dùng": "Ngoài da (9)", "tương tác/đặc điểm": "Miếng dán qua da, tác dụng toàn thân, tránh chuyển hóa lần đầu."},
+     {"name": "Scopolamine", "nhóm": "Liệt đối giao cảm", "đường dùng": "Ngoài da (10)", "tương tác/đặc điểm": "Miếng dán qua da, chống say tàu xe, tránh chuyển hóa lần đầu."},
+{"name": "Rivastigmine", "nhóm": "Kháng cholinesterase", "đường dùng": "Ngoài da (11)", "tương tác/đặc điểm": "Miếng dán qua da, tác dụng toàn thân, tránh chuyển hóa lần đầu."},
+{"name": "Fentanyl", "nhóm": "Opioid tổng hợp", "đường dùng": "Ngoài da (12)", "tương tác/đặc điểm": "Miếng dán giảm đau liên tục qua da, tác dụng toàn thân, tránh chuyển hóa lần đầu."},
+
+
+{"name": "Oxymetazoline", "nhóm": "Cường giao cảm (α1-agonist)", "đường dùng": "Mũi (1)", "tương tác/đặc điểm": "Xịt mũi, tác dụng tại chỗ chống nghẹt mũi."},
+{"name": "Corticosteroid (xịt mũi)", "nhóm": "Hormon và chất tương tự", "đường dùng": "Mũi (2)", "tương tác/đặc điểm": "Xịt mũi, tác dụng tại chỗ chống viêm, chống nghẹt mũi."},
+{"name": "Naphazoline", "nhóm": "Kích thích receptor α1", "đường dùng": "Mũi (3)", "tương tác/đặc điểm": "Xịt mũi, tác dụng tại chỗ chống nghẹt mũi."}
+]
+}
+
