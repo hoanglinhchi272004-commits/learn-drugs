@@ -1,0 +1,148 @@
+{
+  "columns": [
+    "tên thuốc",
+    "nhóm",
+    "đường dùng",
+    "tương tác/đặc điểm"
+  ],
+  "drugs": [
+    {
+      "tên thuốc": "Aspirin",
+      "nhóm": "",
+      "đường dùng": "Uống",
+      "tương tác/đặc điểm": "Là acid yếu, hấp thu tốt hơn ở pH acid (dạ dày)."
+    },
+    {
+      "tên thuốc": "Diazepam",
+      "nhóm": "",
+      "đường dùng": "Uống, tiêm trực tràng",
+      "tương tác/đặc điểm": "Dùng tiêm trực tràng cho trẻ em bị co giật."
+    },
+    {
+      "tên thuốc": "Digoxin",
+      "nhóm": "",
+      "đường dùng": "Uống",
+      "tương tác/đặc điểm": "Tương tác với P-glycoprotein → tăng nồng độ thuốc."
+    },
+    {
+      "tên thuốc": "Enalapril",
+      "nhóm": "Ức chế men chuyển",
+      "đường dùng": "Uống",
+      "tương tác/đặc điểm": "Là tiền chất, cần chuyển hóa qua gan. Tác dụng phụ: ho khan, phù mạch."
+    },
+    {
+      "tên thuốc": "Fentanyl",
+      "nhóm": "Opioid",
+      "đường dùng": "Miếng dán",
+      "tương tác/đặc điểm": "Dạng miếng dán 25 mcg/giờ, tác dụng toàn thân (3 ngày), tránh chuyển hóa lần đầu."
+    },
+    {
+      "tên thuốc": "Insulin",
+      "nhóm": "",
+      "đường dùng": "Tiêm dưới da",
+      "tương tác/đặc điểm": "Cấu trúc polypeptide dễ bị phân hủy, không dùng đường uống."
+    },
+    {
+      "tên thuốc": "Levodopa",
+      "nhóm": "Thuốc Parkinson",
+      "đường dùng": "Uống",
+      "tương tác/đặc điểm": "Hấp thu giảm khi dùng cùng bữa ăn giàu protein."
+    },
+    {
+      "tên thuốc": "Metformin",
+      "nhóm": "Thuốc trị đái tháo đường",
+      "đường dùng": "Uống",
+      "tương tác/đặc điểm": "Dạng XR (giải phóng kéo dài), không nghiền, không bẻ."
+    },
+    {
+      "tên thuốc": "Omeprazole",
+      "nhóm": "Ức chế bơm proton",
+      "đường dùng": "Uống",
+      "tương tác/đặc điểm": "Viên bao tan trong ruột, uống trước ăn 30 phút, không nghiền. Giảm tác dụng của Clopidogrel."
+    },
+    {
+      "tên thuốc": "Statins",
+      "name": "Simvastatin, Atorvastatin",
+      "đường dùng": "Uống",
+      "tương tác/đặc điểm": "Uống vào buổi tối. Tương tác với thuốc ức chế CYP3A4 → tăng nguy cơ tiêu cơ vân."
+    },
+    {
+      "tên thuốc": "Sucralfate",
+      "nhóm": "",
+      "đường dùng": "Uống",
+      "tương tác/đặc điểm": "Uống 1 g trước ăn để tạo lớp màng bảo vệ."
+    },
+    {
+      "tên thuốc": "Vancomycin",
+      "nhóm": "Kháng sinh",
+      "đường dùng": "Truyền tĩnh mạch",
+      "tương tác/đặc điểm": "Truyền nhanh (1g/10 phút) gây Hội chứng người đỏ."
+    },
+    {
+      "tên thuốc": "Ampicillin",
+      "nhóm": "Kháng sinh",
+      "đường dùng": "Uống",
+      "tương tác/đặc điểm": "Hấp thu giảm khi dùng với thức ăn."
+    },
+    {
+      "tên thuốc": "Doxycycline, Tetracycline, Quinolon, Bisphosphonat",
+      "nhóm": "Kháng sinh, Thuốc loãng xương",
+      "đường dùng": "Uống",
+      "tương tác/đặc điểm": "Hấp thu giảm khi dùng với ion kim loại."
+    },
+    {
+      "tên thuốc": "Glucocorticoids",
+      "name": "Prednison",
+      "đường dùng": "Uống",
+      "tương tác/đặc điểm": "Uống vào buổi sáng (6-8 giờ sáng) để tránh ức chế tuyến yên - thượng thận."
+    },
+    {
+      "tên thuốc": "Imipramine, Propranolol, Morphin",
+      "nhóm": "Thuốc chống trầm cảm, Chẹn beta, Opioid",
+      "đường dùng": "Uống",
+      "tương tác/đặc điểm": "Chuyển hóa lần đầu cao."
+    },
+    {
+      "tên thuốc": "Nitroglycerin",
+      "nhóm": "Thuốc giãn mạch",
+      "đường dùng": "Dưới lưỡi",
+      "tương tác/đặc điểm": "Hấp thu nhanh, tránh chuyển hóa lần đầu qua gan."
+    },
+    {
+      "tên thuốc": "Paracetamol, Diazepam",
+      "nhóm": "Hạ sốt, Thuốc an thần",
+      "đường dùng": "Trực tràng",
+      "tương tác/đặc điểm": "Tránh chuyển hóa lần đầu."
+    },
+    {
+      "tên thuốc": "Heparin",
+      "nhóm": "Thuốc chống đông",
+      "đường dùng": "Tiêm",
+      "tương tác/đặc điểm": "Không hấp thu qua đường tiêu hóa."
+    },
+    {
+      "tên thuốc": "Corticosteroid",
+      "name": "Triamcinolon",
+      "đường dùng": "Tiêm nội khớp",
+      "tương tác/đặc điểm": "Trị viêm khớp."
+    },
+    {
+      "tên thuốc": "Salbutamol",
+      "nhóm": "Thuốc trị hen",
+      "đường dùng": "Hít (hồ hấp)",
+      "tương tác/đặc điểm": "Tác dụng tại chỗ, cấp tính (hen cấp)."
+    },
+    {
+      "tên thuốc": "Glucocorticoids",
+      "name": "Beclomethasone",
+      "đường dùng": "Hít (hồ hấp)",
+      "tương tác/đặc điểm": "Dự phòng. Cần súc miệng sau khi dùng để tránh nấm miệng."
+    },
+    {
+      "tên thuốc": "Estrogen",
+      "nhóm": "Hormone",
+      "đường dùng": "Ngoài da (miếng dán)",
+      "tương tác/đặc điểm": "Tác dụng toàn thân, tránh chuyển hóa lần đầu."
+    }
+  ]
+}
